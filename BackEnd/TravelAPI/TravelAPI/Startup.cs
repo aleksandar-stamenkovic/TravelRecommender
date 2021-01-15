@@ -27,6 +27,15 @@ namespace TravelAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS", builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
             GraphClient client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "edukacija");
             client.Connect();
             services.AddSingleton<IGraphClient>(client);
@@ -43,6 +52,8 @@ namespace TravelAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CORS");
 
             app.UseAuthorization();
 
