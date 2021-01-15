@@ -14,7 +14,7 @@ Tooplate 2121 Wave Cafe
 https://www.tooplate.com/view/2121-wave-cafe
 -->
 </head>
-<body onload="proveriLogIn()">
+<body>
   <div class="tm-container">
     <div class="tm-row">
       <!-- Site Header -->
@@ -280,7 +280,7 @@ https://www.tooplate.com/view/2121-wave-cafe
              <p>Želite da putujete, a niste sigurni koju lokaciju da izaberete? Na pravom ste mestu! Pridružite nam se i mi ćemo Vam olakšati da se odlučite!</p>
            </div>
             <div class="tm-black-bg tm-contact-form-container tm-align-right">
-             <form >
+             <form onsubmit="return false">
                <div class="tm-form-group">
                   <input type="text" name="name" class="tm-form-control my-control-register" placeholder="Ime" required="" />
                </div>
@@ -310,7 +310,7 @@ https://www.tooplate.com/view/2121-wave-cafe
               <p>Želite da putujete, a niste sigurni koju lokaciju da izaberete? Na pravom ste mestu! Pridružite nam se i mi ćemo Vam olakšati da se odlučite!</p>
             </div>
             <div class="tm-black-bg tm-contact-form-container tm-align-right">
-             <form>
+             <form onsubmit="return false">
                <div class="tm-form-group">
                  <input type="email" name="email" class="tm-form-control my-control-login" placeholder="Email" required="" />
                </div>
@@ -318,7 +318,7 @@ https://www.tooplate.com/view/2121-wave-cafe
                   <input type="password" name="name" class="tm-form-control my-control-login" placeholder="Password" required="" />
                 </div>               
                 <div>
-                 <button type="submit" class="tm-btn-primary tm-align-right" onclick="LogujSe()">
+                 <button  class="tm-btn-primary tm-align-right" onclick="LogujSe()">
                    Prijavite se
                   </button>                 
              </div>

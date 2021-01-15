@@ -64,7 +64,7 @@ input[type="radio"]:checked ~ input + label {
 }
 
 input + label {
-  color: #3cf;
+  color: #099;
   margin: 0 0 1em 0;
 }
 

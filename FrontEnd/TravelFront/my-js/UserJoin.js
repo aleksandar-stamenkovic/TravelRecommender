@@ -1,9 +1,14 @@
 function proveriLogIn() {
   console.log("onloadbody");
   a = JSON.parse(localStorage.getItem("loged-in"));
-  //console.log(a.loged);
+
   if (a != null) {
-    if (a.Loged != null) {
+    console.log(a.loged);
+    console.log(a.ime);
+    console.log(a.prezime);
+    console.log(a.email);
+    if (true == true) {
+      console.log("iff");
       let btnReg = document.querySelector("#buttonRegisterSpan");
       btnReg.innerHTML = a.ime;
       btnReg = document.querySelector("#buttonRegister");
@@ -13,17 +18,18 @@ function proveriLogIn() {
       btnLog.hidden = true;
       btnLog = document.querySelector("#btnOdjava");
       btnLog.hidden = false;
-    }
-  } else {
-    let btnReg = document.querySelector("#buttonRegisterSpan");
-    btnReg.innerHTML = "Registruj se";
-    btnReg = document.querySelector("#buttonRegister");
-    btnReg.href = "#register";
+    } else {
+      console.log("elss");
+      let btnReg = document.querySelector("#buttonRegisterSpan");
+      btnReg.innerHTML = "Registruj se";
+      btnReg = document.querySelector("#buttonRegister");
+      btnReg.href = "#register";
 
-    let btnLog = document.querySelector("#btnPrijava");
-    btnLog.hidden = false;
-    btnLog = document.querySelector("#btnOdjava");
-    btnLog.hidden = true;
+      let btnLog = document.querySelector("#btnPrijava");
+      btnLog.hidden = false;
+      btnLog = document.querySelector("#btnOdjava");
+      btnLog.hidden = true;
+    }
   }
 }
 
@@ -39,7 +45,7 @@ function registrujSe() {
   console.log(email);
   console.log(password);
 
-  /*fetch("https://localhost:44371/korisnik", {
+  fetch("https://localhost:44340/korisnik", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,11 +75,11 @@ function registrujSe() {
       console.log(a.email);
       console.log(a.ime);
       console.log(a.prezime);
-      window.location.href = "#drink";
+      window.location.href = "index.html";
     } else {
       window.location.href = "#register";
     }
-  });*/
+  });
 }
 
 function LogujSe() {
@@ -83,7 +89,7 @@ function LogujSe() {
   console.log(email);
   console.log(password);
 
-  /*fetch("https://localhost:44371/korisnik/login", {
+  fetch("https://localhost:44340/korisnik/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -92,37 +98,70 @@ function LogujSe() {
       email: email,
       password: password,
     }),
-  }).then((retData) => {
-    if (retData["uspesno"] == true) {
-      localStorage.clear();
-      localStorage.setItem(
-        "loged-in",
-        JSON.stringify({
-          email: email,
-          loged: true,
-          ime: retData["ime"],
-          prezime: retData["prezime"],
-        })
-      );
+  }).then((p) =>
+    p.json().then((data) => {
+      if (data["uspesno"] == true) {
+        console.log(data);
+        localStorage.clear();
 
-      a = JSON.parse(localStorage.getItem("loged-in"));
-      console.log(a.email);
-      console.log("USPESNO");
+        console.log(data);
+        localStorage.setItem(
+          "loged-in",
+          JSON.stringify({
+            email: email,
+            loged: true,
+            ime: data["ime"],
+            prezime: data["irezime"],
+          })
+        );
+        a = JSON.parse(localStorage.getItem("loged-in"));
+        console.log(a.email);
+        console.log("USPESNO");
 
-      window.location.href = "#drink";
-    }
-    else{
+        window.location.href = "index.html";
+      } else {
         window.location.href = "#login";
-    }
-  });*/
+      }
+    })
+  );
 }
 
 function OdjaviSe() {
   console.log("odjava test");
   localStorage.clear();
-  window.location.href = "#drink";
+  window.location.href = "index.html";
 }
 /*
+if (true) {
+  console.log(retData.);
+  localStorage.clear();
+  localStorage.setItem(
+    "loged-in",
+    JSON.stringify({
+      email: email,
+      loged: true,
+      ime: retData["Ime"],
+      prezime: retData["Prezime"],
+    })
+  );
+
+  a = JSON.parse(localStorage.getItem("loged-in"));
+  console.log(a.email);
+  console.log("USPESNO");
+
+  //window.location.href = "index.html";
+} else {
+  //window.location.href = "#login";
+}
+
+
+/*
+
+
+
+
+
+
 function checkUser() {
   a = JSON.parse(localStorage.getItem("loged-in"));
   let email = a.email;
@@ -154,3 +193,5 @@ function checkUser() {
   );
 }
 */
+
+proveriLogIn();
