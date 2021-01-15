@@ -8,12 +8,13 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
     <link rel="stylesheet" href="css/tooplate-wave-cafe.css">
     <link rel="stylesheet" href="./my-css/style1.css">
+    <link rel="stylesheet" href="./my-css/starRating.css">
 <!--
 Tooplate 2121 Wave Cafe
 https://www.tooplate.com/view/2121-wave-cafe
 -->
 </head>
-<body>
+<body onload="proveriLogIn()">
   <div class="tm-container">
     <div class="tm-row">
       <!-- Site Header -->
@@ -49,18 +50,24 @@ https://www.tooplate.com/view/2121-wave-cafe
                   <span>Dodaj mesta</span>
                 </a>
               </li>
-              <!--<li class="tm-page-nav-item">
-                <a href="#register" class="tm-page-link">
+              <li class="tm-page-nav-item">
+                <a href="#register" id="buttonRegister" class="tm-page-link">
                   <i class="fas fa-user tm-page-link-icon"></i>
-                  <span>Registrujte se</span>
+                  <span id="buttonRegisterSpan">Registrujte se</span>
                 </a>
               </li>
-              <li class="tm-page-nav-item">
-                <a href="#login" class="tm-page-link">
+              <li id="btnPrijava" class="tm-page-nav-item">
+                <a href="#login" id="buttonRegister" class="tm-page-link">
                   <i class="fas fa-sign-in-alt tm-page-link-icon"></i>
-                  <span>Prijavite se</span>
+                  <span id="buttonLoginSpan">Prijavite se</span>
                 </a>
-              </li>-->
+              </li>
+              <li id="btnOdjava" hidden class="tm-page-nav-item">
+                <a id="buttonRegister" class="tm-page-link" onclick="OdjaviSe()">
+                  <i class="fas fa-sign-in-alt tm-page-link-icon"></i>
+                  <span id="buttonLoginSpan">Odjavi se</span>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>        
@@ -265,60 +272,60 @@ https://www.tooplate.com/view/2121-wave-cafe
           </div>
           <!-- end Pretrazi Page -->
 
-          <!-- Kontakt Page -->
-                    <!-- Contact Page -->
-         <!--<div id="register" class="tm-page-content">
+         <!-- Register and Login Page -->
+          
+         <div id="register" class="tm-page-content">
             <div class="tm-black-bg tm-contact-text-container">
              <h2 class="tm-text-primary">Pridružite nam se</h2>
              <p>Želite da putujete, a niste sigurni koju lokaciju da izaberete? Na pravom ste mestu! Pridružite nam se i mi ćemo Vam olakšati da se odlučite!</p>
            </div>
             <div class="tm-black-bg tm-contact-form-container tm-align-right">
-             <form action="" method="POST" id="contact-form">
+             <form >
                <div class="tm-form-group">
-                  <input type="text" name="name" class="tm-form-control" placeholder="Ime" required="" />
+                  <input type="text" name="name" class="tm-form-control my-control-register" placeholder="Ime" required="" />
                </div>
                <div class="tm-form-group">
-                 <input type="text" name="name" class="tm-form-control" placeholder="Prezime" required="" />
+                 <input type="text" name="lastname" class="tm-form-control my-control-register" placeholder="Prezime" required="" />
                </div>
                <div class="tm-form-group">
-                  <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+                  <input type="email" name="email" class="tm-form-control my-control-register" placeholder="Email" required="" />
                 </div>
                 <div class="tm-form-group">
-                  <input type="password" name="name" class="tm-form-control" placeholder="Password" required="" />
+                  <input type="password" name="name" class="tm-form-control my-control-register" placeholder="Password" required="" />
                 </div>               
                 <div>
-                  <button type="submit" class="tm-btn-primary tm-align-right">
+                  <button  class="tm-btn-primary tm-align-right" onclick="registrujSe()">
                     Registrujte se
                   </button>
                </div>
              </form>
            </div>
          </div>
-         <!-- end Contact Page -->
+         
           
-          <!-- Contact Page -->
-          <!--<div id="login" class="tm-page-content">
+          
+          <div id="login" class="tm-page-content">
             <div class="tm-black-bg tm-contact-text-container">
               <h2 class="tm-text-primary">Pridružite nam se</h2>
               <p>Želite da putujete, a niste sigurni koju lokaciju da izaberete? Na pravom ste mestu! Pridružite nam se i mi ćemo Vam olakšati da se odlučite!</p>
             </div>
             <div class="tm-black-bg tm-contact-form-container tm-align-right">
-             <form action="" method="POST" id="contact-form">
+             <form>
                <div class="tm-form-group">
-                 <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+                 <input type="email" name="email" class="tm-form-control my-control-login" placeholder="Email" required="" />
                </div>
                 <div class="tm-form-group">
-                  <input type="password" name="name" class="tm-form-control" placeholder="Password" required="" />
+                  <input type="password" name="name" class="tm-form-control my-control-login" placeholder="Password" required="" />
                 </div>               
                 <div>
-                 <button type="submit" class="tm-btn-primary tm-align-right">
+                 <button type="submit" class="tm-btn-primary tm-align-right" onclick="LogujSe()">
                    Prijavite se
-                  </button>
+                  </button>                 
              </div>
               </form>
             </div>
-          </div>-->
-          <!-- end Kontakt Page -->
+          </div>
+          <!-- end Register and Login Page -->
 
           <!-- Dodaj mesta page -->
           <div id="addplace" class="tm-page-content">
@@ -327,41 +334,9 @@ https://www.tooplate.com/view/2121-wave-cafe
               <p>Ovde je omogućeno dodati rutu kojom ste putovali tako da svako mesto predstavlja jednu lokaciju koju ste posetili. Svaku dodatu karticu možete opisati, dodati sliku kao i ostaviti vašu ocenu za svaku od lokacija.</p>
             </div>
 
-            <div class="tm-list-item">          
-              <img src="img/iced-americano.png" alt="Image" class="tm-list-item-img">
-              <div class="tm-black-bg tm-list-item-text">
-                <h3 class="tm-list-item-name">Kopaonik<span class="tm-list-item-price"><i class="fas fa-star"></i> 10.25</span></h3>
-                <p class="tm-list-item-description">Najlepša planina u srbiji veoma popularna zimi kao skijalište, i kao mesto za odmor i skijanje.</p>
-              </div>
-            </div>
 
-            <div class="tm-black-bg tm-contact-text-container ">
-              <form action="" method="POST" id="contact-form">
-                <div class="tm-form-group">
-                  <input type="text" name="name" class="tm-form-control" placeholder="Naziv mesta" required="" />
-                </div>
-                <div class="tm-form-group">
-                  <input type="email" name="description" class="tm-form-control" placeholder="Opis . . ." required="" />
-                </div>
-                <div class="tm-form-group">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </div>             
-                <div>
-                  <button type="submit" style=" display: inline;" class="tm-btn-primary tm-align-right">
-                    Dodaj
-                  </button>
-                  <button type="submit" style="display: inline;" class="tm-btn-primary tm-align-right">
-                    Završi
-                  </button>
-                </div>
-              </form>
-            </div>
           </div>
-
+          <!-- end Dodaj mesta page-->
 
         </main>
       </div>    
@@ -381,7 +356,10 @@ https://www.tooplate.com/view/2121-wave-cafe
       </video>
   </div>
 
-  <script src="js/jquery-3.4.1.min.js"></script>    
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="./my-js/UserJoin.js"></script>
+  <script src="./my-js/addTravelRoute.js"></script>
+   
   <script>
 
     function setVideoSize() {
