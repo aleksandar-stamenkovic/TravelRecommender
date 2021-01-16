@@ -69,7 +69,7 @@ function registrujSe() {
         })
       );
 
-      console.log("USPESNO");
+      console.log("USPESNO REGISTROVANJE");
       a = JSON.parse(localStorage.getItem("loged-in"));
       console.log(a.loged);
       console.log(a.email);
@@ -116,7 +116,7 @@ function LogujSe() {
         );
         a = JSON.parse(localStorage.getItem("loged-in"));
         console.log(a.email);
-        console.log("USPESNO");
+        console.log("USPESNO LOGOVANJE");
 
         window.location.href = "index.html";
       } else {

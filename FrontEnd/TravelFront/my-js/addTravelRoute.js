@@ -1,12 +1,13 @@
 function test() {
   console.log("adasdasdasadsasddasasddsa");
-
   return false;
 }
 
+generisiKarticuDodajMesto();
+
 let nizMesta = [];
 let rate = 1;
-let nizSlika = [];
+var file_data = [];
 
 function setRating(value) {
   console.log("pre:" + rate);
@@ -20,7 +21,7 @@ function dodajMesto() {
   let ocena = rate;
 
   console.log("dodaj mesto uso" + naziv, opis, ocena);
-  if (naziv == "" && opis == "") {
+  if (naziv == "" || opis == "") {
     return false;
   }
 
@@ -45,11 +46,66 @@ function dodajMesto() {
     imeSlike: filename,
   };
 
+  file_data.push($("#file").prop("files")[0]);
+  console.log(file_data);
+
   $(".dodaj-forma-dinamik").remove();
   generisiKarticuMesto(naziv, opis, ocena, filename);
   nizMesta.push(tmpObject);
 
   generisiKarticuDodajMesto();
+}
+
+function zavrsiDodavanjeRute() {
+  aktivirajSpiner("spiner1", "#zavrsiBtn");
+
+  console.log(JSON.stringify(nizMesta));
+  if (nizMesta == null) {
+    console.log("lista mesta je null");
+    return false;
+  }
+
+  fetch("https://localhost:44340/mesto", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nizMesta,
+    }),
+  }).then((p) => {
+    if (p.ok) {
+      console.log("USPESNO DODATA RUTA");
+      uploadSlike();
+      window.location.href = "index.html";
+      zaustaviSpiner("#spiner1");
+    } else {
+      window.location.href = "#addplace";
+      zaustaviSpiner("#spiner1");
+    }
+  });
+}
+
+function uploadSlike() {
+  var form_data = new FormData();
+  form_data.append("files", file_data); //mora ovako (ne radi bez 'files')
+  $.ajax({
+    url: "https://localhost:44371/ImageUpload/" + id, // point to server-side controller method
+    dataType: "text", // what to expect back from the server
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: form_data,
+    type: "post",
+    success: function (response) {
+      //$('#msg').html(response); // display success response from the server
+      console.log("Uploadovana slika");
+    },
+    error: function (response) {
+      //$('#msg').html(response); // display error response from the server
+      console.log("Greska Uploadovana slika");
+    },
+  });
 }
 
 function generisiKarticuDodajMesto() {
@@ -91,7 +147,7 @@ function generisiKarticuDodajMesto() {
       '<div class="tm-black-bg tm-contact-text-container " >' +
       '<h5 class="tm-list-item-name">Završi putovanje i unesi rutu koja se sastoju iz navedenih mesta.' +
       '<span class="tm-list-item-price">' +
-      '<button type="button" class="tm-btn-primary tm-align-right" onclick="zavrsiRutu()">' +
+      '<button type="button" id="zavrsiBtn" class="tm-btn-primary tm-align-right" onclick="zavrsiDodavanjeRute()">' +
       "Završi" +
       "</button>" +
       "</span>" +
@@ -103,7 +159,23 @@ function generisiKarticuDodajMesto() {
   console.log("generator proso");
 }
 
-generisiKarticuDodajMesto();
+function aktivirajSpiner(idSpinera, idHosta) {
+  const number = Math.random() * 10;
+  console.log(number);
+  var element;
+  if (number > 5) {
+    element = $(
+      '<i id="' + idSpinera + '" class="far fa-snowflake fa-spin"></i>'
+    );
+  } else {
+    element = $('<i id="' + idSpinera + '" class="fas fa-sun fa-spin"></i>');
+  }
+  $(idHosta).append(element);
+}
+
+function zaustaviSpiner(idSpinera) {
+  $(idSpinera).remove();
+}
 
 function generisiKarticuMesto(naziv, opis, ocena, nazivSlike = "nema slike") {
   var element = $(
