@@ -131,67 +131,6 @@ function OdjaviSe() {
   localStorage.clear();
   window.location.href = "index.html";
 }
-/*
-if (true) {
-  console.log(retData.);
-  localStorage.clear();
-  localStorage.setItem(
-    "loged-in",
-    JSON.stringify({
-      email: email,
-      loged: true,
-      ime: retData["Ime"],
-      prezime: retData["Prezime"],
-    })
-  );
 
-  a = JSON.parse(localStorage.getItem("loged-in"));
-  console.log(a.email);
-  console.log("USPESNO");
-
-  //window.location.href = "index.html";
-} else {
-  //window.location.href = "#login";
-}
-
-
-/*
-
-
-
-
-
-
-function checkUser() {
-  a = JSON.parse(localStorage.getItem("loged-in"));
-  let email = a.email;
-
-  fetch("https://localhost:44371/korisnik/" + email, {
-    method: "GET",
-  }).then((p) =>
-    p.json().then((data) => {
-      let nizPodataka = [
-        data["id"],
-        data["ime"],
-        data["prezime"],
-        data["email"],
-        data["password"],
-      ];
-
-      let ime = nizPodataka[1];
-      let prezime = nizPodataka[2];
-      console.log(ime + " " + prezime);
-      localStorage.setItem(
-        "loged-in-info",
-        JSON.stringify({ ime: ime, prezime: prezime })
-      );
-      b = JSON.parse(localStorage.getItem("loged-in-info"));
-      console.log(b.ime);
-      console.log(b.prezime);
-      window.location.href = "shop.html";
-    })
-  );
-}
-*/
-
+//instant pozivi funcija
 proveriLogIn();

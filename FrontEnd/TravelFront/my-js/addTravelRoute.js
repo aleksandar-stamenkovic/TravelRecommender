@@ -55,6 +55,7 @@ function dodajMesto() {
   $(".dodaj-forma-dinamik").remove();
   generisiKarticuMesto(naziv, opis, ocena, filename);
   nizMesta.push(tmpObject);
+  ocena = 1;
 
   generisiKarticuDodajMesto();
 }
@@ -201,86 +202,3 @@ function generisiKarticuMesto(naziv, opis, ocena, nazivSlike = "nema slike") {
   $("#addplace").append(element);
   console.log("generator proso");
 }
-
-/*
-            <div class="tm-list-item">
-              <div class="tm-black-bg tm-list-item-text tm-contact-text-container">
-                <h3 class="tm-list-item-name">Kopaonik<span class="tm-list-item-price"><i class="fas fa-star"></i> 4</span></h3>
-                <p class="tm-list-item-description">Najlepša planina u srbiji veoma popularna zimi kao skijalište, i kao mesto za odmor i skijanje.</p>
-              </div>
-            </div>
-
-
-            <div class="tm-black-bg tm-contact-text-container ">
-              <form onsubmit="return false">
-                <div class="tm-form-group">
-                  <input type="text" name="name" class="tm-form-control my-control-route-name" placeholder="Naziv mesta" required="" />
-                </div>
-                <div class="tm-form-group">
-                  <input type="text" name="description" class="tm-form-control my-control-route-descr" placeholder="Opis . . ." required="" />
-                </div>
-                <div class="tm-form-group">
-                  <div class="rating">
-                    <input type="radio" name="test" id="one" checked onclick="setRating(1)"/>
-                    <label for="one"><i class="fa fa-star"></i></label>
-                    <input type="radio" name="test" id="two" onclick="setRating(2)"/>
-                    <label for="two"><i class="fa fa-star"></i></label>
-                    <input type="radio" name="test" id="three" onclick="setRating(3)"/>
-                    <label for="three"><i class="fa fa-star"></i></label>
-                    <input type="radio" name="test" id="four" onclick="setRating(4)"/>
-                    <label for="four"><i class="fa fa-star"></i></label>
-                    <input type="radio" name="test" id="five" onclick="setRating(5)"/>
-                    <label for="five"><i class="fa fa-star"></i></label>
-                  </div>
-                  <br>
-                </div>             
-                <div>
-                  <div class="input-group mb-3">
-                    <input type="file" id="file" class="upload-slike form-control" name="file" multiple />
-                 </div>
-                  <button type="submit"  class="tm-btn-primary tm-align-right" onclick="dodajMesto()">
-                    Dodaj
-                  </button> 
-                </div>
-              </form>
-              
-            </div>
-              <div class="tm-black-bg tm-contact-text-container " >
-
-                <h5 class="tm-list-item-name">Završi putovanje i unesi rutu koja se sastoju iz navedenih mesta.
-                  <span class="tm-list-item-price">
-                    <button type="button" class="tm-btn-primary tm-align-right" onclick="zavrsiRutu()">
-                      Završi
-                    </button>
-                  </span>
-                </h5>
-                
-            </div>
-
-
-
-
-/*var file_data = $("#file").prop("files")[0];
-  var form_data = new FormData();
-  form_data.append("files", file_data); //mora ovako (ne radi bez 'files')
-  $.ajax({
-    url: "https://localhost:44340/ImageUpload/", // point to server-side controller method
-    dataType: "text", // what to expect back from the server
-    cache: false,
-    contentType: false,
-    processData: false,
-    data: form_data,
-    type: "post",
-    success: function (response) {
-      //$('#msg').html(response); // display success response from the server
-      console.log("Uploadovana slika");
-    },
-    error: function (response) {
-      //$('#msg').html(response); // display error response from the server
-      console.log("Greska Uploadovana slika");
-    },
-  });
-  var file_data = $("#file1").prop("files")[0];
-
-
-            */
