@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace TravelAPI.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]    
     public class ImageUploadController : ControllerBase
     {
         public static IWebHostEnvironment _environment;
@@ -25,33 +27,35 @@ namespace TravelAPI.Controllers
         }
 
         [HttpPost]
-        [Route("{id}")]
-        public string Post([FromForm] FileUploadAPI objFile, string id)
+        [Route("{vreme}")]
+        public string Post([FromForm] FileUploadAPI objFile, string vreme)
         {
             try
             {
+
                 if (objFile.files.Length > 0)
                 {
                     if (!Directory.Exists(_environment.WebRootPath + "\\Upload\\"))
                     {
                         Directory.CreateDirectory(_environment.WebRootPath + "\\Upload\\");
                     }
-                    using (FileStream fileStream = System.IO.File.Create(_environment.WebRootPath + "\\Upload\\" + id + ".jpg"))
+                    using (FileStream fileStream = System.IO.File.Create(_environment.WebRootPath + "\\Upload\\"+ vreme + objFile.files.FileName))
                     {
                         objFile.files.CopyTo(fileStream);
                         fileStream.Flush();
-                        return "\\Upload\\" + id + ".jpg";
+                        return "uspesno";
                     }
                 }
                 else
                 {
-                    return "Failed";
+                    return "neuspesno";
                 }
             }
             catch (Exception ex)
             {
                 return ex.Message.ToString();
             }
+            return "puko exception";
         }
 
         [HttpGet]

@@ -1,12 +1,13 @@
 function test() {
-  console.log("adasdasdasadsasddasasddsa");
-  return false;
+  console.log(Date.now());
 }
+test();
 
 generisiKarticuDodajMesto();
 
 let nizMesta = [];
 let rate = 1;
+var timemsList = [];
 var file_data = [];
 
 function setRating(value) {
@@ -19,12 +20,10 @@ function dodajMesto() {
   let naziv = document.querySelector(".my-control-route-name").value;
   let opis = document.querySelector(".my-control-route-descr").value;
   let ocena = rate;
-
   console.log("dodaj mesto uso" + naziv, opis, ocena);
   if (naziv == "" || opis == "") {
     return false;
   }
-
   var fullPath = document.getElementById("file").value;
   var filename;
   if (fullPath) {
@@ -38,16 +37,20 @@ function dodajMesto() {
     }
   }
 
+  let timems = Date.now();
+
   console.log(filename);
   let tmpObject = {
     naziv: naziv,
     opis: opis,
     ocena: ocena,
-    imeSlike: filename,
+    imeSlike: timems + filename,
   };
-
   file_data.push($("#file").prop("files")[0]);
+  timemsList.push(timems);
+
   console.log(file_data);
+  console.log(timemsList);
 
   $(".dodaj-forma-dinamik").remove();
   generisiKarticuMesto(naziv, opis, ocena, filename);
@@ -70,13 +73,13 @@ function zavrsiDodavanjeRute() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      nizMesta,
-    }),
+    body: JSON.stringify(nizMesta),
   }).then((p) => {
     if (p.ok) {
       console.log("USPESNO DODATA RUTA");
-      uploadSlike();
+      file_data.forEach((el, index) => {
+        uploadSlike(el, timemsList[index]);
+      });
       window.location.href = "index.html";
       zaustaviSpiner("#spiner1");
     } else {
@@ -86,11 +89,11 @@ function zavrsiDodavanjeRute() {
   });
 }
 
-function uploadSlike() {
+function uploadSlike(file_data, time) {
   var form_data = new FormData();
-  form_data.append("files", file_data); //mora ovako (ne radi bez 'files')
+  form_data.append("files", file_data); //<-- OVO MORA OVAKO (nece bez 'files')
   $.ajax({
-    url: "https://localhost:44371/ImageUpload/" + id, // point to server-side controller method
+    url: "https://localhost:44340/ImageUpload/" + time, // point to server-side controller method
     dataType: "text", // what to expect back from the server
     cache: false,
     contentType: false,
@@ -253,4 +256,31 @@ function generisiKarticuMesto(naziv, opis, ocena, nazivSlike = "nema slike") {
                 </h5>
                 
             </div>
+
+
+
+
+/*var file_data = $("#file").prop("files")[0];
+  var form_data = new FormData();
+  form_data.append("files", file_data); //mora ovako (ne radi bez 'files')
+  $.ajax({
+    url: "https://localhost:44340/ImageUpload/", // point to server-side controller method
+    dataType: "text", // what to expect back from the server
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: form_data,
+    type: "post",
+    success: function (response) {
+      //$('#msg').html(response); // display success response from the server
+      console.log("Uploadovana slika");
+    },
+    error: function (response) {
+      //$('#msg').html(response); // display error response from the server
+      console.log("Greska Uploadovana slika");
+    },
+  });
+  var file_data = $("#file1").prop("files")[0];
+
+
             */

@@ -39,8 +39,9 @@ namespace TravelAPI.Controllers
                     Dictionary<string, object> queryDict = new Dictionary<string, object>();
                     queryDict.Add("Naziv", mesto.Naziv);
                     queryDict.Add("Opis", mesto.Opis);
-                    queryDict.Add("Ocena", mesto.Ocena);
                     queryDict.Add("ImeSlike", mesto.ImeSlike);
+                    queryDict.Add("Ocena", mesto.Ocena);
+                    
 
                     query = new CypherQuery("CREATE (m:Mesto {Naziv:'" + mesto.Naziv
                                             + "', Opis:'" + mesto.Opis
