@@ -66,5 +66,18 @@ namespace TravelAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{mesto}")]
+        public ActionResult<List<Mesto>> GetMesta(string mesto)
+        {
+            var query = new CypherQuery("MATCH (m:Mesto {Naziv:'" + mesto + "'})" +
+                                        "MATCH (m)-[*1..3]-(a)" +
+                                        "RETURN a",
+                                        new Dictionary<string, object>(), CypherResultMode.Set);
+
+            List<Mesto> mesta = ((IRawGraphClient)client).ExecuteGetCypherResults<Mesto>(query).ToList();
+
+            return mesta;
+        }
     }
 }
