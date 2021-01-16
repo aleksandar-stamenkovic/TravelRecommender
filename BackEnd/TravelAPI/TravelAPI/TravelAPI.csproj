@@ -8,5 +8,9 @@
     <PackageReference Include="Neo4jClient" Version="1.1.0.14" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 
 </Project>
