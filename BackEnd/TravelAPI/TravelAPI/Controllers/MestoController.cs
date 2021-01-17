@@ -59,7 +59,7 @@ namespace TravelAPI.Controllers
                     // Treba ga modifikovati
 
                     query = new CypherQuery("MATCH (m:Mesto {Naziv:'" + mesto.Naziv + "'})" +
-                                            " SET m.Opis = m.Opis + '" + mesto.Opis + "'" +
+                                            " SET m.Opis = m.Opis + '\n" + mesto.Opis + "'" +
                                             " SET m.Ocena = m.Ocena + " + mesto.Ocena +
                                             " SET m.Brojac = m.Brojac + 1",
                                             new Dictionary<string, object>(), CypherResultMode.Set);
