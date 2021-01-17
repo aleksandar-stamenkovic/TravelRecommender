@@ -42,28 +42,53 @@ function pretraziMesta() {
   );
 }
 
-/*generisiKarticuSearchResult(
-  "img/special-01.jpg",
-  3.5,
-  "Special Item",
-  "Here is a short text description for the first special item. You are not allowed to redistribute this template ZIP file."
-);
-
-generisiKarticuSearchResult(
-  "img/special-01.jpg",
-  3.5,
-  "Special Item",
-  "Here is a short text description for the first special item. You are not allowed to redistribute this template ZIP file."
-);
-generisiKarticuSearchResult(
-  "img/special-01.jpg",
-  3.5,
-  "Special Item",
-  "Here is a short text description for the first special item. You are not allowed to redistribute this template ZIP file."
-);*/
-
 /*
     $.getscript("./my-js/addTravelRoute.js",function(){
         aktivirajSpiner()
         });
 */
+
+function inicijalizujMapu() {
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYWNhYWNhYXMiLCJhIjoiY2trMTN4eXg2MDZucTJ2b2JhdXU4Nm40cyJ9.DwCaq-aCSPz1_pCOFeMJ7A';
+    var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [21.8957605, 43.320904],
+    zoom: 10
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+    var marker = new mapboxgl.Marker()
+      .setLngLat([21.8957605, 43.320904])
+      .addTo(map);
+}
+
+inicijalizujMapu();
+
+function setujMarker(grad) {
+  var mapboxClient = mapboxSdk({
+		accessToken: 'pk.eyJ1IjoiYWNhYWNhYXMiLCJhIjoiY2trMTN4eXg2MDZucTJ2b2JhdXU4Nm40cyJ9.DwCaq-aCSPz1_pCOFeMJ7A'
+	});
+	mapboxClient.geocoding
+		.forwardGeocode({
+			query: grad,
+			autocomplete: false,
+			limit: 1
+		})
+		.send()
+		.then(function (response) {
+			if (response && response.body && response.body.features && response.body.features.length) {
+				var feature = response.body.features[0];
+
+				var map = new mapboxgl.Map({
+					container: 'map',
+					style: 'mapbox://styles/mapbox/streets-v11',
+					center: feature.center,
+					zoom: 10
+				});
+				new mapboxgl.Point().setLngLat(feature.center).addTo(map);
+			}
+		});
+}
+
+setujMarker("Novi Sad");
+setujMarker("Zrenjanin");
