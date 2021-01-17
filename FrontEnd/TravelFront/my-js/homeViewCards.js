@@ -31,9 +31,9 @@ function pretraziKarticu(host) {
     .querySelector(".tm-list-item-name")
     .innerHTML.split("<")[0];
   console.log(searchFor);
-  /*document.querySelector(".search-place-input").value = searchFor;
+  document.querySelector(".search-place-input").value = searchFor;
   document.querySelector(".search-place-btn").click();
-  document.querySelector("#pretrazi-btn").click();*/
+  document.querySelector("#pretrazi-btn").click();
 }
 
 function preuzmiPreporuku() {
@@ -54,23 +54,6 @@ function preuzmiPreporuku() {
   );
 }
 
-/*function preuzmiAktuelno() {
-  fetch("https://localhost:44340/mesto/aktuelno", {
-    method: "GET",
-  }).then((p) =>
-    p.json().then((data) => {
-      data.forEach((element) => {
-        let naziv = element["naziv"];
-        let opis = element["opis"];
-        let ocena = element["srednjaOcena"];
-        let slikaSrc = element["slika"];
-
-        console.log(naziv, opis, ocena, slikaSrc);
-        generisiKarticu("#actual", slikaSrc, ocena, naziv, opis);
-      });
-    })
-  );*/
-
 function preuzmiNajboljeOcenjeno() {
   fetch("https://localhost:44340/mesto/najboljeOcenjeni", {
     method: "GET",
@@ -80,7 +63,10 @@ function preuzmiNajboljeOcenjeno() {
         let naziv = element["naziv"];
         let opis = element["opis"];
         let ocena = element["srednjaOcena"];
-        let slikaSrc = element["slika"];
+        let slikaSrc =
+          "https://localhost:44340/imageUpload/" + element["imeSlike"];
+
+        console.log(slikaSrc);
 
         console.log(naziv, opis, ocena, slikaSrc);
         generisiKarticu("#popular", slikaSrc, naziv, ocena, opis);
@@ -88,32 +74,6 @@ function preuzmiNajboljeOcenjeno() {
     })
   );
 }
-
-/*generisiKarticu(
-  "#bestRated",
-  "img/hot-americano.png",
-  "Kopaonik planina",
-  "5.0",
-  "Najlepsa planina lepo organizovana sa veoma lepim skijalistima" +
-    "Najlepsa planina lepo organizovana sa veoma lepim skijalistima " +
-    "Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
-);
-
-generisiKarticu(
-  "#actual",
-  "img/hot-americano.png",
-  "Kopaonik planina",
-  "5.0",
-  "Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
-);
-
-generisiKarticu(
-  "#popular",
-  "img/hot-americano.png",
-  "Kopaonik planina",
-  "5.0",
-  "Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
-);*/
 
 preuzmiPreporuku();
 preuzmiNajboljeOcenjeno();

@@ -17,52 +17,57 @@ function setRating(value) {
 }
 
 function dodajMesto() {
-  let naziv = document.querySelector(".my-control-route-name").value;
-  let opis = document.querySelector(".my-control-route-descr").value;
-  let ocena = rate;
-  console.log("dodaj mesto uso" + naziv, opis, ocena);
-  if (naziv == "" || opis == "") {
-    return false;
-  }
-  var fullPath = document.getElementById("file").value;
-  var filename;
-  if (fullPath) {
-    var startIndex =
-      fullPath.indexOf("\\") >= 0
-        ? fullPath.lastIndexOf("\\")
-        : fullPath.lastIndexOf("/");
-    filename = fullPath.substring(startIndex);
-    if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
-      filename = filename.substring(1);
+  a = JSON.parse(localStorage.getItem("loged-in"));
+  console.log(a.loged);
+  if (a != null) {
+    let naziv = document.querySelector(".my-control-route-name").value;
+    let opis = document.querySelector(".my-control-route-descr").value;
+    let ocena = rate;
+    console.log("dodaj mesto uso" + naziv, opis, ocena);
+    if (naziv == "" || opis == "") {
+      return false;
     }
+    var fullPath = document.getElementById("file").value;
+    var filename;
+    if (fullPath) {
+      var startIndex =
+        fullPath.indexOf("\\") >= 0
+          ? fullPath.lastIndexOf("\\")
+          : fullPath.lastIndexOf("/");
+      filename = fullPath.substring(startIndex);
+      if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
+        filename = filename.substring(1);
+      }
+    }
+
+    let timems = Date.now();
+
+    console.log(filename);
+    let tmpObject = {
+      naziv: naziv,
+      opis: opis,
+      ocena: ocena,
+      imeSlike: timems + filename,
+    };
+    file_data.push($("#file").prop("files")[0]);
+    timemsList.push(timems);
+
+    console.log(file_data);
+    console.log(timemsList);
+
+    $(".dodaj-forma-dinamik").remove();
+    generisiKarticuMesto(naziv, opis, ocena, filename);
+    nizMesta.push(tmpObject);
+    ocena = 1;
+
+    generisiKarticuDodajMesto();
+  } else {
+    dodajCustomAlert("Morate biti ulogovani kako bi dodali mesto");
   }
-
-  let timems = Date.now();
-
-  console.log(filename);
-  let tmpObject = {
-    naziv: naziv,
-    opis: opis,
-    ocena: ocena,
-    imeSlike: timems + filename,
-  };
-  file_data.push($("#file").prop("files")[0]);
-  timemsList.push(timems);
-
-  console.log(file_data);
-  console.log(timemsList);
-
-  $(".dodaj-forma-dinamik").remove();
-  generisiKarticuMesto(naziv, opis, ocena, filename);
-  nizMesta.push(tmpObject);
-  ocena = 1;
-
-  generisiKarticuDodajMesto();
 }
 
 function zavrsiDodavanjeRute() {
   aktivirajSpiner("spiner1", "#zavrsiBtn");
-
   console.log(JSON.stringify(nizMesta));
   if (nizMesta == null) {
     console.log("lista mesta je null");
@@ -138,7 +143,7 @@ function generisiKarticuDodajMesto() {
       "</div>" +
       "<br>" +
       "</div>" +
-      "<div>" +
+      '<div id="dugmeDodavanja">' +
       '<div class="input-group mb-3">' +
       '<input type="file" id="file" class="upload-slike form-control" name="file" multiple />' +
       "</div>" +
@@ -160,6 +165,25 @@ function generisiKarticuDodajMesto() {
       "</div>"
   );
   $("#addplace").append(element);
+  console.log("generator proso");
+}
+
+function dodajCustomAlert(string) {
+  var element = $(
+    '<div id="custom-alert">' +
+      "<p></p>" +
+      '<div class="tm-black-bg tm-contact-text-container custom-alert-text" >' +
+      string +
+      "</div>" +
+      "</div>"
+  );
+  $("#dugmeDodavanja").append(element);
+  let el = document.querySelector("#custom-alert");
+  el.scrollIntoView();
+  var timer = setInterval(function () {
+    $("#custom-alert").remove();
+    clearInterval(timer);
+  }, 3000);
   console.log("generator proso");
 }
 

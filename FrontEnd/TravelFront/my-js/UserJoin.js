@@ -1,5 +1,5 @@
 function proveriLogIn() {
-  window.location.href = "#drink";
+  //window.location.href = "#drink";
   console.log("onloadbody");
   a = JSON.parse(localStorage.getItem("loged-in"));
 

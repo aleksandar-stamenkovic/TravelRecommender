@@ -34,6 +34,11 @@
 #toShow {
   margin-top: -15px;
 }
+
+.custom-alert-text {
+  color: #3cf;
+}
+
 /*----------------------
 loader and spiner
 -----------------------*/
