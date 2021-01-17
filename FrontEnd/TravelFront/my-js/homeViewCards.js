@@ -2,12 +2,12 @@ function generisiKarticu(host, slikaSrc, naziv, ocena, opis) {
   let opis1 = opis.substring(0, 84) + "...";
   let opis2 = opis.substring(84);
   var element = $(
-    '<div class="tm-list-item"  onclick="pretraziKarticu(this)">' +
+    '<div class="tm-list-item">' +
       '<img src="' +
       slikaSrc +
-      '" alt="Image" class="tm-list-item-img">' +
+      '" alt="Image" class="tm-list-item-img"  onclick="pretraziKarticu(this)">' +
       '<div class="tm-black-bg tm-list-item-text">' +
-      '<h3 class="tm-list-item-name">' +
+      '<h3 class="tm-list-item-name"  onclick="pretraziKarticu(this)">' +
       naziv +
       '<span class="tm-list-item-price"><i class="fas fa-star"></i> ' +
       ocena +
@@ -27,14 +27,13 @@ function generisiKarticu(host, slikaSrc, naziv, ocena, opis) {
 }
 
 function pretraziKarticu(host) {
-  let searchFor = host
+  let searchFor = host.parentNode
     .querySelector(".tm-list-item-name")
     .innerHTML.split("<")[0];
   console.log(searchFor);
-
-  document.querySelector(".search-place-input").value = searchFor;
+  /*document.querySelector(".search-place-input").value = searchFor;
   document.querySelector(".search-place-btn").click();
-  document.querySelector("#pretrazi-btn").click();
+  document.querySelector("#pretrazi-btn").click();*/
 }
 
 function preuzmiPreporuku() {
@@ -49,7 +48,7 @@ function preuzmiPreporuku() {
         let slikaSrc = element["slika"];
 
         console.log(naziv, opis, ocena, slikaSrc);
-        generisiKarticu("#bestRated", slikaSrc, ocena, naziv, opis);
+        generisiKarticu("#bestRated", slikaSrc, naziv, ocena, opis);
       });
     })
   );
@@ -84,13 +83,13 @@ function preuzmiNajboljeOcenjeno() {
         let slikaSrc = element["slika"];
 
         console.log(naziv, opis, ocena, slikaSrc);
-        generisiKarticu("#popular", slikaSrc, ocena, naziv, opis);
+        generisiKarticu("#popular", slikaSrc, naziv, ocena, opis);
       });
     })
   );
 }
 
-generisiKarticu(
+/*generisiKarticu(
   "#bestRated",
   "img/hot-americano.png",
   "Kopaonik planina",
@@ -114,8 +113,7 @@ generisiKarticu(
   "Kopaonik planina",
   "5.0",
   "Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
-);
-
+);*/
 
 preuzmiPreporuku();
 preuzmiNajboljeOcenjeno();
