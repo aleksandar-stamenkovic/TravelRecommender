@@ -115,3 +115,7 @@ generisiKarticu(
   "5.0",
   "Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
 );
+
+
+preuzmiPreporuku();
+preuzmiNajboljeOcenjeno();
