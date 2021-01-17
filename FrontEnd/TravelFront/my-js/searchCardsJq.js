@@ -1,3 +1,5 @@
+var map;
+
 function generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis) {
   var element = $(
     '<div class="tm-black-bg tm-special-item">' +
@@ -50,7 +52,7 @@ function pretraziMesta() {
 
 function inicijalizujMapu() {
   mapboxgl.accessToken = 'pk.eyJ1IjoiYWNhYWNhYXMiLCJhIjoiY2trMTN4eXg2MDZucTJ2b2JhdXU4Nm40cyJ9.DwCaq-aCSPz1_pCOFeMJ7A';
-    var map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [21.8957605, 43.320904],
@@ -79,13 +81,15 @@ function setujMarker(grad) {
 			if (response && response.body && response.body.features && response.body.features.length) {
 				var feature = response.body.features[0];
 
-				var map = new mapboxgl.Map({
+				/*var map = new mapboxgl.Map({
 					container: 'map',
 					style: 'mapbox://styles/mapbox/streets-v11',
 					center: feature.center,
 					zoom: 10
-				});
-				new mapboxgl.Point().setLngLat(feature.center).addTo(map);
+        });*/
+        
+        new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+        
 			}
 		});
 }
