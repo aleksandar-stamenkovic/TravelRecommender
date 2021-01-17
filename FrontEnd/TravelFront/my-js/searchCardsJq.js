@@ -39,6 +39,7 @@ function pretraziMesta() {
 
         console.log(naziv, opis, ocena, slikaSrc);
         generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis);
+        setujMarker(naziv);
       });
     })
   );
