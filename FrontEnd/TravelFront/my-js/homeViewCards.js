@@ -38,7 +38,7 @@ function pretraziKarticu(host) {
 }
 
 function preuzmiPreporuku() {
-  fetch("https://localhost:44340/mesto/preporuka", {
+  fetch("https://localhost:44340/mesto/random", {
     method: "GET",
   }).then((p) =>
     p.json().then((data) => {
@@ -55,7 +55,7 @@ function preuzmiPreporuku() {
   );
 }
 
-function preuzmiAktuelno() {
+/*function preuzmiAktuelno() {
   fetch("https://localhost:44340/mesto/aktuelno", {
     method: "GET",
   }).then((p) =>
@@ -70,8 +70,7 @@ function preuzmiAktuelno() {
         generisiKarticu("#actual", slikaSrc, ocena, naziv, opis);
       });
     })
-  );
-}
+  );*/
 
 function preuzmiNajboljeOcenjeno() {
   fetch("https://localhost:44340/mesto/najboljeOcenjeni", {
