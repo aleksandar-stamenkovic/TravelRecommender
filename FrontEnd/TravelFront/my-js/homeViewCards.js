@@ -45,7 +45,7 @@ function preuzmiPreporuku() {
       data.forEach((element) => {
         let naziv = element["naziv"];
         let opis = element["opis"];
-        let ocena = element["ocena"];
+        let ocena = element["srednjaOcena"];
         let slikaSrc = element["slika"];
 
         console.log(naziv, opis, ocena, slikaSrc);
@@ -63,7 +63,7 @@ function preuzmiAktuelno() {
       data.forEach((element) => {
         let naziv = element["naziv"];
         let opis = element["opis"];
-        let ocena = element["ocena"];
+        let ocena = element["srednjaOcena"];
         let slikaSrc = element["slika"];
 
         console.log(naziv, opis, ocena, slikaSrc);
@@ -74,14 +74,14 @@ function preuzmiAktuelno() {
 }
 
 function preuzmiNajboljeOcenjeno() {
-  fetch("https://localhost:44340/mesto/najbolje", {
+  fetch("https://localhost:44340/mesto/najboljeOcenjeni", {
     method: "GET",
   }).then((p) =>
     p.json().then((data) => {
       data.forEach((element) => {
         let naziv = element["naziv"];
         let opis = element["opis"];
-        let ocena = element["ocena"];
+        let ocena = element["srednjaOcena"];
         let slikaSrc = element["slika"];
 
         console.log(naziv, opis, ocena, slikaSrc);

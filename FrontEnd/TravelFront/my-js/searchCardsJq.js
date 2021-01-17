@@ -48,7 +48,7 @@ function pretraziMesta() {
       data.forEach((element) => {
         let naziv = element["naziv"];
         let opis = element["opis"];
-        let ocena = element["ocena"];
+        let ocena = element["srednjaOcena"];
         let slikaSrc = element["slika"];
 
         console.log(naziv, opis, ocena, slikaSrc);
