@@ -22,30 +22,27 @@ function generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis) {
 }
 
 function pretraziMesta() {
-  $("#searchResult").remove();
+  $("#searchResult").empty();
   let searchInput = document.querySelector(".search-place-input").value;
   console.log(searchInput);
-  fetch("https://localhost:44340/mesta/" + searchInput, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  fetch("https://localhost:44340/mesto/" + searchInput, {
+    method: "GET"
   }).then((p) =>
     p.json().then((data) => {
       data.forEach((element) => {
         let naziv = element["naziv"];
         let opis = element["opis"];
         let ocena = element["ocena"];
-        let slikaSrc = eleent["slika"];
+        let slikaSrc = element["slika"];
 
-        console.log(naziv, opis, ocena, slika);
+        console.log(naziv, opis, ocena, slikaSrc);
         generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis);
       });
     })
   );
 }
 
-generisiKarticuSearchResult(
+/*generisiKarticuSearchResult(
   "img/special-01.jpg",
   3.5,
   "Special Item",
@@ -63,7 +60,7 @@ generisiKarticuSearchResult(
   3.5,
   "Special Item",
   "Here is a short text description for the first special item. You are not allowed to redistribute this template ZIP file."
-);
+);*/
 
 /*
     $.getscript("./my-js/addTravelRoute.js",function(){
