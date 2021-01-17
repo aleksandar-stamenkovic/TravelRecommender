@@ -59,9 +59,9 @@ function inicijalizujMapu() {
     zoom: 10
     });
     map.addControl(new mapboxgl.NavigationControl());
-    var marker = new mapboxgl.Marker()
+    /*var marker = new mapboxgl.Marker()
       .setLngLat([21.8957605, 43.320904])
-      .addTo(map);
+      .addTo(map);*/
 }
 
 inicijalizujMapu();
