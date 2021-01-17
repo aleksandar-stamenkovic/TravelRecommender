@@ -23,6 +23,17 @@
   padding-right: 10px !important;
   border-radius: 0;
 }
+
+.show-more-btn {
+  font-size: 10pt;
+  float: right;
+  margin-top: -10px;
+  color: #3cf;
+}
+
+#toShow {
+  margin-top: -15px;
+}
 /*----------------------
 loader and spiner
 -----------------------*/
