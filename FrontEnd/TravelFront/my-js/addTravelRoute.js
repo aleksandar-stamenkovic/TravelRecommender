@@ -66,6 +66,7 @@ function dodajMesto() {
   } else {
     dodajCustomAlert("Morate biti ulogovani kako bi dodali mesto");
   }
+  rate = 1;
 }
 
 function zavrsiDodavanjeRute() {
@@ -93,6 +94,12 @@ function zavrsiDodavanjeRute() {
     } else {
       window.location.href = "#addplace";
       zaustaviSpiner("#spiner1");
+    }
+  });
+  file_data.forEach((el, index) => {
+    if (el != undefined) {
+      console.log(el, timemsList[index]);
+      uploadSlike(el, timemsList[index]);
     }
   });
 }

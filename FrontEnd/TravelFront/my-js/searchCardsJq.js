@@ -7,7 +7,7 @@ function generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis) {
     '<div class="tm-black-bg tm-special-item">' +
       '<img src="' +
       slikaSrc +
-      '" alt="Image">' +
+      '" alt="Image" class="search-res-image">' +
       '<div class="tm-special-item-description">' +
       '<div><h3><span class="tm-list-item-price search-rating"><i class="fas fa-star"></i> ' +
       ocena +
@@ -49,7 +49,8 @@ function pretraziMesta() {
         let naziv = element["naziv"];
         let opis = element["opis"];
         let ocena = element["srednjaOcena"];
-        let slikaSrc = element["slika"];
+        let slikaSrc =
+          "https://localhost:44340/imageUpload/" + element["imeSlike"];
 
         console.log(naziv, opis, ocena, slikaSrc);
         generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis);
@@ -80,8 +81,8 @@ function inicijalizujMapu() {
   map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
-    center: [21.8957605, 43.320904],
-    zoom: 10,
+    center: [21, 44.1],
+    zoom: 5.2,
   });
   map.addControl(new mapboxgl.NavigationControl());
   /*var marker = new mapboxgl.Marker()

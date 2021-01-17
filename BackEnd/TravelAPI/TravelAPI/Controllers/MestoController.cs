@@ -87,7 +87,7 @@ namespace TravelAPI.Controllers
         {
             var query = new CypherQuery("MATCH (m:Mesto {Naziv:'" + mesto + "'})" +
                                         "MATCH (m)-[*1..3]-(a)" +
-                                        "RETURN a",
+                                        "RETURN DISTINCT a",
                                         new Dictionary<string, object>(), CypherResultMode.Set);
 
             List<Mesto> mesta = ((IRawGraphClient)client).ExecuteGetCypherResults<Mesto>(query).ToList();

@@ -39,6 +39,11 @@
   color: #3cf;
 }
 
+.search-res-image {
+  object-fit: cover;
+  width: 320px;
+  height: 160px;
+}
 /*----------------------
 loader and spiner
 -----------------------*/
