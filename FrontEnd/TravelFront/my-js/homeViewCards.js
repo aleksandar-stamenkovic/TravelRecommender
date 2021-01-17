@@ -45,7 +45,8 @@ function preuzmiPreporuku() {
         let naziv = element["naziv"];
         let opis = element["opis"];
         let ocena = element["srednjaOcena"];
-        let slikaSrc = element["slika"];
+        let slikaSrc =
+          "https://localhost:44340/imageUpload/" + element["imeSlike"];
 
         console.log(naziv, opis, ocena, slikaSrc);
         generisiKarticu("#bestRated", slikaSrc, naziv, ocena, opis);
