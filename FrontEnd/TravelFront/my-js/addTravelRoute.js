@@ -41,17 +41,19 @@ function dodajMesto() {
     }
 
     let timems = Date.now();
+    console.log(a.ime);
 
     console.log(filename);
     let tmpObject = {
       naziv: naziv,
-      opis: opis,
+      opis: a.ime + ": " + opis,
       ocena: ocena,
       imeSlike: timems + filename,
     };
     file_data.push($("#file").prop("files")[0]);
     timemsList.push(timems);
 
+    console.log(tmpObject);
     console.log(file_data);
     console.log(timemsList);
 
