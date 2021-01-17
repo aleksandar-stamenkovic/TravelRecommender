@@ -13,7 +13,11 @@ namespace TravelAPI.DomainModel
 
         public string Opis { get; set; }
 
-        public float Ocena { get; set; }
+        public float Ocena { get; set; } // sumarna ocena
+
+        public int Brojac { get; set; } // brojac ocena
+
+        public string SrednjaOcena { get { return (Ocena / Brojac).ToString(".0"); } }
 
         public string ImeSlike { get; set; }
 
