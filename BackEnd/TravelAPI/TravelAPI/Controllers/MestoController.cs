@@ -101,7 +101,7 @@ namespace TravelAPI.Controllers
         public ActionResult<List<Mesto>> GetNajboljeOcenjeni()
         {
             var query = new CypherQuery("MATCH (m:Mesto)" +
-                                        "RETURN m ORDER BY m.Ocena DESC LIMIT 5",
+                                        "RETURN m ORDER BY toFloat(m.Ocena)/m.Brojac DESC LIMIT 5",
                                         new Dictionary<string, object>(), CypherResultMode.Set);
 
             List<Mesto> mesta = ((IRawGraphClient)client).ExecuteGetCypherResults<Mesto>(query).ToList();
