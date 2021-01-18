@@ -110,6 +110,7 @@ h2 { margin-top: 0; }
     text-decoration: none;
     align-items: center;      
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .tm-page-link:hover,
