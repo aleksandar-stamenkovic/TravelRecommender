@@ -89,7 +89,8 @@ namespace TravelAPI.Controllers
         [HttpGet("{mesto}")]
         public ActionResult<List<Mesto>> GetMesta(string mesto)
         {
-            var query = new CypherQuery("MATCH (m:Mesto {Naziv:'" + mesto + "'})" +
+            var query = new CypherQuery("MATCH (m:Mesto)" +
+                                        "WHERE toLower(m.Naziv) = '" + mesto.ToLower() + "' " +
                                         "MATCH (m)-[*1..3]-(a)" +
                                         "RETURN DISTINCT a",
                                         new Dictionary<string, object>(), CypherResultMode.Set);
