@@ -31,6 +31,12 @@
   color: #3cf;
 }
 
+.attach-new-branch {
+  font-size: 10pt;
+  margin-top: -10px;
+  color: #3cf;
+}
+
 #toShow {
   margin-top: -15px;
 }

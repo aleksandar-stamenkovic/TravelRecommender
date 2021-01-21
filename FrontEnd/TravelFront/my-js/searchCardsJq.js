@@ -12,7 +12,7 @@ function generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis) {
       '<div><h3><span class="tm-list-item-price search-rating"><i class="fas fa-star"></i> ' +
       ocena +
       "</span></h3></div>" +
-      '<h2 class="tm-text-primary tm-special-item-title">' +
+      '<h2 class="tm-text-primary tm-special-item-title add-branch-need">' +
       naziv +
       "</h2>" +
       '<p class="tm-special-item-text">' +
@@ -21,7 +21,8 @@ function generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis) {
       '<p id="toShow" hidden class="tm-special-item-text">' +
       opis2 +
       "</p>" +
-      '<label class="show-more-btn" onclick="prikaziVise(this)">... show more</label>' +
+      '<label class="show-more-btn" onclick="prikaziVise(this)">... prikaži više</label>' +
+      '<label class="attach-new-branch" onclick="zakaciNovuGranu(this)"> dodaj rutu </label>' +
       "</div>" +
       "</div>"
   );
@@ -29,13 +30,13 @@ function generisiKarticuSearchResult(slikaSrc, ocena, naziv, opis) {
   console.log("generator proso");
 }
 
-generisiKarticuSearchResult(
-  "img/special-01.jpg",
-  4.8,
-  "Kopaonik",
-  "Najlepsa planina lepo organizovana sa veoma lepim skijalistima" +
-    "Najlepsa planina lepo organizovana sa veoma lepim skijalistima Najlepsa planina lepo organizovana sa veoma lepim skijalistima Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
-);
+//generisiKarticuSearchResult(
+//  "img/special-01.jpg",
+//  4.8,
+//  "Kopaonik",
+//  "Najlepsa planina lepo organizovana sa veoma lepim skijalistima" +
+//    "Najlepsa planina lepo organizovana sa veoma lepim skijalistima Najlepsa planina lepo organizovana sa veoma lepim skijalistima Najlepsa planina lepo organizovana sa veoma lepim skijalistima"
+//);
 
 function pretraziMesta() {
   $("#searchResult").empty();
@@ -64,11 +65,29 @@ function prikaziVise(host) {
   let realHost = host.parentNode;
   if (realHost.querySelector("#toShow").hidden == true) {
     realHost.querySelector("#toShow").hidden = false;
-    host.innerHTML = "... show less";
+    host.innerHTML = "... prikaži manje";
   } else {
     realHost.querySelector("#toShow").hidden = true;
-    host.innerHTML = "... show more";
+    host.innerHTML = "... prikaži više";
   }
+}
+
+function zakaciNovuGranu(host) {
+  let pnode = host.parentNode.querySelector(".add-branch-need").innerHTML;
+  let textExtracted;
+  console.log(pnode);
+
+  if (pnode.includes("<") == true) {
+    let tmptext = pnode.split("<");
+    console.log(tmptext);
+    textExtracted = tmptext[0];
+  } else {
+    textExtracted = pnode;
+  }
+  console.log("Extraktovan naziv: " + textExtracted);
+
+  document.querySelector(".my-control-route-name").value = textExtracted;
+  document.querySelector("#addRoute-btn").click();
 }
 
 /*----------------------------------
@@ -125,5 +144,6 @@ function setujMarker(grad) {
     });
 }
 
-setujMarker("Novi Sad");
-setujMarker("Zrenjanin");
+//test markeri
+//setujMarker("Novi Sad");
+//setujMarker("Zrenjanin");

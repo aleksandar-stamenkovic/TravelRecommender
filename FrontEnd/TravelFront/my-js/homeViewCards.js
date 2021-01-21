@@ -7,7 +7,7 @@ function generisiKarticu(host, slikaSrc, naziv, ocena, opis) {
       slikaSrc +
       '" alt="Image" class="tm-list-item-img"  onclick="pretraziKarticu(this)">' +
       '<div class="tm-black-bg tm-list-item-text">' +
-      '<h3 class="tm-list-item-name"  onclick="pretraziKarticu(this)">' +
+      '<h3 class="tm-list-item-name add-branch-need"  onclick="pretraziKarticu(this)">' +
       naziv +
       '<span class="tm-list-item-price"><i class="fas fa-star"></i> ' +
       ocena +
@@ -18,7 +18,8 @@ function generisiKarticu(host, slikaSrc, naziv, ocena, opis) {
       '<p id="toShow" hidden class="tm-special-item-text">' +
       opis2 +
       "</p>" +
-      '<label class="show-more-btn" onclick="prikaziVise(this)">... show more</label>' +
+      '<label class="show-more-btn" onclick="prikaziVise(this)">... prikaži više</label>' +
+      '<label class="attach-new-branch" onclick="zakaciNovuGranu(this)"> dodaj rutu </label>' +
       "</div>" +
       "</div>"
   );

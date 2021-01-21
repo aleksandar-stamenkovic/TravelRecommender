@@ -18,8 +18,9 @@ function setRating(value) {
 
 function dodajMesto() {
   a = JSON.parse(localStorage.getItem("loged-in"));
-  console.log(a.loged);
+
   if (a != null) {
+    //console.log(a.loged);
     let naziv = document.querySelector(".my-control-route-name").value;
     let opis = document.querySelector(".my-control-route-descr").value;
     let ocena = rate;
