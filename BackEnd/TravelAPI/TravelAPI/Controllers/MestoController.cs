@@ -27,8 +27,10 @@ namespace TravelAPI.Controllers
             foreach (var mesto in mesta)
             {
                 // Pokusamo da ga nadjemo u bazu
-                var query = new CypherQuery("MATCH (m:Mesto {Naziv:'" + mesto.Naziv + "'}) RETURN m",
-                                        new Dictionary<string, object>(), CypherResultMode.Set);
+                var query = new CypherQuery("MATCH (m:Mesto) " +
+                                            "WHERE toLower(m.Naziv) = '" + mesto.Naziv.ToLower() + "' " +
+                                            "RETURN m",
+                                            new Dictionary<string, object>(), CypherResultMode.Set);
 
                 Mesto mesto_ret = ((IRawGraphClient)client).ExecuteGetCypherResults<Mesto>(query).FirstOrDefault();
 
@@ -58,8 +60,9 @@ namespace TravelAPI.Controllers
                 {
                     // Treba ga modifikovati
 
-                    query = new CypherQuery("MATCH (m:Mesto {Naziv:'" + mesto.Naziv + "'})" +
-                                            " SET m.Opis = m.Opis + '\n" + mesto.Opis + "'" +
+                    query = new CypherQuery("MATCH (m:Mesto)" +
+                                            "WHERE toLower(m.Naziv) = '" + mesto.Naziv.ToLower() + "' " +
+                                            " SET m.Opis = m.Opis + '<br/>" + mesto.Opis + "'" +
                                             " SET m.Ocena = m.Ocena + " + mesto.Ocena +
                                             " SET m.Brojac = m.Brojac + 1",
                                             new Dictionary<string, object>(), CypherResultMode.Set);
@@ -72,8 +75,9 @@ namespace TravelAPI.Controllers
             for (int i = 1; i < mesta.Count; i++)
             {
                 var query = new CypherQuery("MATCH (a:Mesto), (b:Mesto)" +
-                                            "WHERE a.Naziv= '" + mesta[0].Naziv + "' AND b.Naziv= '" + mesta[i].Naziv + "'" +
-                                            "MERGE (a)-[:NEXT]->(b)",
+                                            "WHERE toLower(a.Naziv) = '" + mesta[0].Naziv.ToLower() +
+                                            "' AND toLower(b.Naziv) = '" + mesta[i].Naziv.ToLower() + "'" +
+                                            "MERGE (a)-[:NEXT]->(b)", // kreira poteg samo ako vec ne postoji
                                             new Dictionary<string, object>(), CypherResultMode.Set);
 
                 ((IRawGraphClient)client).ExecuteCypher(query);
